@@ -5,7 +5,7 @@ I use a lot of free hosting/DNS solutions for my web projects and needed a quick
 ## Usage
 
 ```
-./generate.sh "desiredshortlink" "newurl.com/something"
+./generate.sh "desiredurl" "newurl.com/something"
 ```
 
 ### Note
@@ -13,5 +13,5 @@ I use a lot of free hosting/DNS solutions for my web projects and needed a quick
 Shortened URLs can be nested for organization purposes.
 
 ```
-./generate.sh "blog/desiredshortlink" "newurl.com/something"
+./generate.sh "blog/desiredurl" "newurl.com/something"
 ```
