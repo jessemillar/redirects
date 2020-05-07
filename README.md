@@ -7,3 +7,11 @@ I use a lot of free hosting/DNS solutions for my web projects and needed a quick
 ```
 ./generate.sh "desiredshortlink" "newurl.com/something"
 ```
+
+### Note
+
+Shortened URLs can be nested for organization purposes.
+
+```
+./generate.sh "blog/desiredshortlink" "newurl.com/something"
+```
