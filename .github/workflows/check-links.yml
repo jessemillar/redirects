@@ -10,4 +10,4 @@ jobs:
       - name: Markup Link Checker (mlc)
         uses: becheran/mlc@v0.14.3
         with:
-          args: --ignore-links "*linkedin.com*" "*spotify.com*" "*ballchasing.com*" "redirect-link" "*githubenterprise.com*"
+          args: --ignore-links "*linkedin.com*" "*spotify.com*" "*ballchasing.com*" "redirect-link"
