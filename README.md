@@ -12,10 +12,10 @@ I have a CloudFlare page rule set up to redirect `jessemillar.com/r/*` links her
 ./new.sh "desiredurl" "newurl.com/something" "desiredtitle (optional)"
 ```
 
-### Note
-
 Shortened URLs can be nested for organization purposes.
 
 ```
 ./new.sh "blog/desiredurl" "newurl.com/something" "desiredtitle (optional)"
 ```
+
+If you clone this repo into your own, modify `config.sh` to contain your domain name. This allows you to run `./update.sh` to pull in the latest shell scripts without affecting your redirects.
