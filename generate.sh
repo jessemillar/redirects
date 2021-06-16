@@ -1,15 +1,20 @@
 #!/usr/bin/env bash
 
-mkdir -p "$1" || true
-sed "s,redirect-link,${2//&/\\&},g" template.html > "$1/index.html"
+dir="$1"
+# Escape ampersand characters
+link="${2//&/\\&}"
+title="$3"
 
-if [ -z "$3" ]
+mkdir -p "$dir" || true
+sed "s,redirect-link,$link,g" template.html > "$dir/index.html"
+
+if [ -z "$title" ]
 then
 	# Use the link as the page title
-	sed "s,redirect-title,Redirecting to ${2//&/\\&},g" "$1/index.html" > "$1/tmp.html"
+	sed "s,redirect-title,Redirecting to $link,g" "$dir/index.html" > "$dir/tmp.html"
 else
 	# Use the supplied page title
-	sed "s,redirect-title,$3,g" "$1/index.html" > "$1/tmp.html"
+	sed "s,redirect-title,$title,g" "$dir/index.html" > "$dir/tmp.html"
 fi
 
-mv "$1/tmp.html" "$1/index.html"
+mv "$dir/tmp.html" "$dir/index.html"
