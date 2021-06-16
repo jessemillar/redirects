@@ -9,7 +9,7 @@ I have a CloudFlare page rule set up to redirect `jessemillar.com/r/*` links her
 ## Usage
 
 ```
-./generate.sh "desiredurl" "newurl.com/something"
+./new.sh "desiredurl" "newurl.com/something" "desiredtitle (optional)"
 ```
 
 ### Note
@@ -17,5 +17,5 @@ I have a CloudFlare page rule set up to redirect `jessemillar.com/r/*` links her
 Shortened URLs can be nested for organization purposes.
 
 ```
-./generate.sh "blog/desiredurl" "newurl.com/something"
+./new.sh "blog/desiredurl" "newurl.com/something" "desiredtitle (optional)"
 ```
