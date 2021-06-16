@@ -15,21 +15,28 @@ do
 			webTitle=$(echo "$webTitle" | awk '{$1=$1};1' | awk 'NF')
 
 			useWebTitle=
-			read -rp "Do you want to use \"$webTitle\" as the title for \"$link\"? [Y/n] " -e useWebTitle </dev/tty
-			# Default value
-			useWebTitle=${useWebTitle:-Y}
-			# Trim whitespace
-			useWebTitle=$(echo "$useWebTitle" | awk '{$1=$1};1')
+			if [ -z "$webTitle" ]
+			then
+				useWebTitle="n"
+			else
+				read -rp "Do you want to use \"$webTitle\" as the title for \"$link\"? [Y/n] " -e useWebTitle </dev/tty
+				# Default value
+				useWebTitle=${useWebTitle:-Y}
+				# Trim whitespace
+				useWebTitle=$(echo "$useWebTitle" | awk '{$1=$1};1')
+			fi
 
 			if [[ "$useWebTitle" == "Y" ]]; then
 				title="$webTitle"
 			else
 				while [ -z "$title" ]; do
-					read -rp "What title do you want to use? " -e title </dev/tty
+					read -rp "What title do you want to use for \"$link\"? " -e title </dev/tty
 					# Trim whitespace
 					title=$(echo "$title" | awk '{$1=$1};1')
 				done
 			fi
+		else
+			title="$localTitle"
 		fi
 
 		./generate.sh "$dir" "$link" "$title"
