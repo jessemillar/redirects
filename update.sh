@@ -2,14 +2,20 @@
 
 source ./config.sh
 
-# Delete all existing shell scripts
-find . -maxdepth 1 -name "*.sh" ! -name "update.sh" ! -name "config.sh" -delete
-
 # Clone the jessemillar /redirects repo to a /tmp location
 (
 rm -rf /tmp/jessemillar || true
 cd /tmp && mkdir jessemillar && cd jessemillar && git clone https://github.com/jessemillar/redirects.git || return
 )
+
+if ! cmp -s "update.sh" "/tmp/jessemillar/redirects/update.sh"; then
+	cp /tmp/jessemillar/redirects/update.sh .
+	echo "update.sh has been updated. Please run it again."
+	return
+fi
+
+# Delete all existing shell scripts
+find . -maxdepth 1 -name "*.sh" ! -name "config.sh" -delete
 
 # Copy all the new shell scripts
 cp /tmp/jessemillar/redirects/*.sh .
