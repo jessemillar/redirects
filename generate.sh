@@ -3,7 +3,7 @@
 dir="$1"
 # Escape ampersand characters
 link="${2//&/\\&}"
-title="$3"
+title="${3//&/\\&}"
 
 mkdir -p "$dir" || true
 sed "s,redirect-link,$link,g" template.html > "$dir/index.html"
