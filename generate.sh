@@ -4,7 +4,6 @@ dir="$1"
 # Escape ampersand characters
 link="${2//&/\\&}"
 title="${3//&/\\&}"
-echo $title
 
 mkdir -p "$dir" || true
 sed "s,redirect-link,$link,g" template.html > "$dir/index.html"
@@ -13,8 +12,6 @@ if [ -z "$title" ]
 then
 	title="$(./title.sh "$dir" "$link")"
 	sed "s,redirect-title,$title,g" "$dir/index.html" > "$dir/tmp.html"
-else
-	echo "Title is not null"
 fi
 
 sed "s,redirect-title,$title,g" "$dir/index.html" > "$dir/tmp.html"
