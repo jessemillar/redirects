@@ -36,4 +36,4 @@ else
 	title="$localTitle"
 fi
 
-return "$title"
+echo "$title"
