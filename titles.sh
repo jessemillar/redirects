@@ -2,12 +2,16 @@
 
 while IFS= read -r -d '' dir
 do
+	title=
+
 	# Only work with real files, not symlinks
 	if [ -f "$dir/index.html" ] && [ ! -L "$dir/index.html" ]; then
 		link="$(grep "window.location.href" "$dir/index.html" | sed -e 's/\s*window\.location\.href = "//g' | rev | cut -c3- | rev)"
 		localTitle="$(awk 'BEGIN{IGNORECASE=1;FS="<title>|</title>";RS=EOF} {print $2}' "$dir/index.html")"
 
-		if [[ "$localTitle" != "*Redirecting to*" ]]; then
+		echo $link $localTitle
+
+		if [[ "$localTitle" == "Redirecting to"* ]]; then
 			webTitle="$(wget -qO- "$link" | awk 'BEGIN{IGNORECASE=1;FS="<title>|</title>";RS=EOF} {print $2}')"
 
 			useWebTitle=
