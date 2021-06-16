@@ -9,10 +9,10 @@ do
 		link="$(grep "window.location.href" "$dir/index.html" | sed -e 's/\s*window\.location\.href = "//g' | rev | cut -c3- | rev)"
 		localTitle="$(awk 'BEGIN{IGNORECASE=1;FS="<title>|</title>";RS=EOF} {print $2}' "$dir/index.html")"
 
-		echo $link $localTitle
-
 		if [[ "$localTitle" == "Redirecting to"* ]]; then
 			webTitle="$(wget -qO- "$link" | awk 'BEGIN{IGNORECASE=1;FS="<title>|</title>";RS=EOF} {print $2}')"
+			# Trim whitespace
+			webTitle=$(echo "$webTitle" | awk '{$1=$1};1' | awk 'NF')
 
 			useWebTitle=
 			read -rp "Do you want to use \"$webTitle\" as the title for \"$link\"? [Y/n] " -e useWebTitle </dev/tty
