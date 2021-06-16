@@ -8,9 +8,10 @@ do
 		localTitle="$(awk 'BEGIN{IGNORECASE=1;FS="<title>|</title>";RS=EOF} {print $2}' "$dir/index.html")"
 
 		if [[ "$localTitle" != "*Redirecting to*" ]]; then
-			webTitle="$(curl -L "$link" | awk 'BEGIN{IGNORECASE=1;FS="<title>|</title>";RS=EOF} {print $2}')"
+			webTitle="$(wget -qO- "$link" | awk 'BEGIN{IGNORECASE=1;FS="<title>|</title>";RS=EOF} {print $2}')"
 
-			read -rp "Do you want to use $webTitle as the redirect title? [Y/n] " -e useWebTitle
+			useWebTitle=
+			read -rp "Do you want to use \"$webTitle\" as the title for \"$link\"? [Y/n] " -e useWebTitle </dev/tty
 			# Default value
 			useWebTitle=${useWebTitle:-Y}
 			# Trim whitespace
@@ -20,7 +21,7 @@ do
 				title="$webTitle"
 			else
 				while [ -z "$title" ]; do
-					read -rp "What title do you want to use? " -e title
+					read -rp "What title do you want to use? " -e title </dev/tty
 					# Trim whitespace
 					title=$(echo "$title" | awk '{$1=$1};1')
 				done
