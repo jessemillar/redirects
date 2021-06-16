@@ -19,8 +19,8 @@ fi
 # Delete all existing shell scripts
 find . -maxdepth 1 -name "*.sh" ! -name "config.sh" -delete
 
-# Copy all the new shell scripts
-cp /tmp/jessemillar/redirects/*.sh .
+# Copy all the new shell scripts (but don't clobber config.sh)
+cp -n /tmp/jessemillar/redirects/*.sh .
 
 # Replace our template with the new one
 rm template.html
