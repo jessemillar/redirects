@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# This script actually generates a new shortlink
+# Called from new.sh and regenerate.sh
+
 dir="$1"
 # Escape ampersand characters
 link="${2//&/\\&}"

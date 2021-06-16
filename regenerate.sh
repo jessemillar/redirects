@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# This script loops through all existing links and applies their content to the template.html
+# Meant to help quickly push changes (like new tracking) to every link
+
 while IFS= read -r -d '' dir
 do
 	# Only work with real files, not symlinks

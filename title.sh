@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# This script dynamically helps pick a title for a new shortlink by scanning the web for an existing title and then asking for permission to use what it found (or allow the user to supply an alternative)
+
 title=
 dir="$1"
 link="$2"

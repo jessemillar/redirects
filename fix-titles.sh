@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# This script is a wrapper around title.sh that loops through all files in the repo and allows me to quickly update ones with a non-pretty HTML title
+# Likely not needed now that I've cleaned up all my links, but I'm leaving it here for potential usefulness in the future
+
 while IFS= read -r -d '' dir
 do
 	# Only work with real files, not symlinks
