@@ -2,16 +2,18 @@
 
 source ./config.sh
 
+echo "Updating..."
+
 # Clone the jessemillar /redirects repo to a /tmp location
 (
 rm -rf /tmp/jessemillar || true
-cd /tmp && mkdir jessemillar && cd jessemillar && git clone https://github.com/jessemillar/redirects.git || return
+cd /tmp && mkdir jessemillar && cd jessemillar && git clone --quiet https://github.com/jessemillar/redirects.git || return
 )
 
 if ! cmp -s "update.sh" "/tmp/jessemillar/redirects/update.sh"; then
 	cp /tmp/jessemillar/redirects/update.sh .
 	echo "update.sh has been updated. Please run it again."
-	return
+	exit
 fi
 
 # Delete all existing shell scripts
@@ -34,3 +36,5 @@ rm README.md
 sed "s,jessemillar\.com,$site,g" /tmp/jessemillar/redirects/README.md > README.md
 sed "s,jessemillar,$currentRepoOwner,g" README.md > tmp.md
 mv tmp.md README.md
+
+echo "Updating complete"
