@@ -3,7 +3,8 @@
 while IFS= read -r -d '' dir
 do
 	if [ -f "$dir/index.html" ]; then
-		link="$(grep "Redirecting to" "$dir/index.html" | sed -e 's/\s*<title>Redirecting to\s*//g' | sed -e 's/<\/title>\s*//g')"
+		# TODO Parse out the page title too
+		link="$(grep "window.location.href" "$dir/index.html" | sed -e 's/\s*window\.location\.href = "//g' | rev | cut -c3- | rev)"
 		./generate.sh "$dir" "$link"
 	fi
 done < <( find . -type d -not -path '*/.git*' -print0)
