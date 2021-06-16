@@ -8,8 +8,8 @@ localTitle="$(awk 'BEGIN{IGNORECASE=1;FS="<title>|</title>";RS=EOF} {print $2}' 
 
 if [[ "$localTitle" == "Redirecting to"* ]] || [ "$localTitle" == "redirect-title" ] || [ -z "$localTitle" ]; then
 	webTitle="$(wget -qO- "$link" | awk 'BEGIN{IGNORECASE=1;FS="<title>|</title>";RS=EOF} {print $2}')"
-	# Trim whitespace
-	webTitle=$(echo "$webTitle" | awk '{$1=$1};1' | awk 'NF')
+	# Trim whitespace and limit to one line to tame crazy pages (looking at you, RedBubble)
+	webTitle=$(echo "$webTitle" | awk '{$1=$1};1' | sed -n '1,1 p')
 
 	useWebTitle=
 	if [ -z "$webTitle" ]
