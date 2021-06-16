@@ -4,9 +4,9 @@ title=
 dir="$1"
 link="$2"
 
-localTitle="$(awk 'BEGIN{IGNORECASE=1;FS="<title>|</title>";RS=EOF} {print $2}' "$dir/index.html")"
+localTitle="$(awk 'BEGIN{IGNORECASE=1;FS="<title>|</title>";RS=EOF} {print $2}' "$dir/index.html" 2> /dev/null)"
 
-if [[ "$localTitle" == "Redirecting to"* ]]; then
+if [[ "$localTitle" == "Redirecting to"* ]] || [ -z "$localTitle" ]; then
 	webTitle="$(wget -qO- "$link" | awk 'BEGIN{IGNORECASE=1;FS="<title>|</title>";RS=EOF} {print $2}')"
 	# Trim whitespace
 	webTitle=$(echo "$webTitle" | awk '{$1=$1};1' | awk 'NF')
